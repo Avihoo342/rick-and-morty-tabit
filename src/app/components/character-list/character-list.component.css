@@ -1,0 +1,77 @@
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+  }
+  
+
+  .character-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Auto-fill columns based on screen size */
+    gap: 1rem;
+    padding: 1rem; /* Add padding for spacing */
+  }
+  
+  /* Individual character card styling */
+  .character-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ccc; /* Add a subtle border for card definition */
+    border-radius: 8px; /* Rounded corners for better appearance */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+    background-color: #fff; /* Light background for cards */
+  }
+  
+  /* Card image styling */
+  .character-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%; /* Make the image circular */
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Mat-form-field (Angular Material input fields) */
+  mat-form-field {
+    width: 100%;
+    max-width: 300px; /* Limit the width on larger screens */
+    margin: 0 auto; /* Center the form field */
+  }
+  
+  /* Loader styling */
+  .loading {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    /* Toolbar responsiveness */
+    .toolbar {
+      flex-direction: column; /* Stack toolbar items */
+      align-items: stretch; /* Align items to fill available space */
+    }
+  
+    /* Reduce card size for smaller screens */
+    .character-list {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    /* Further reduce card size for very small screens */
+    .character-list {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+  
+    /* Adjust card padding for smaller screens */
+    .character-card {
+      padding: 0.5rem;
+    }
+  }

@@ -1,0 +1,16 @@
+<div *ngIf="character$ | async as character" class="character-detail-container">
+    <div class="character-image">
+      <img alt="character data" [src]="character.image" [alt]="character.name" />
+    </div>
+    <div class="character-info">
+      <h1>{{ character.name }}</h1>
+      <p><strong>Status:</strong> {{ character.status }}</p>
+      <p><strong>Species:</strong> {{ character.species }}</p>
+      <p><strong>Type:</strong> {{ character.type || 'N/A' }}</p>
+      <p><strong>Gender:</strong> {{ character.gender }}</p>
+    </div>
+  </div>
+  
+  <div *ngIf="!(character$ | async)" class="loading">
+    <p>Loading character details...</p>
+  </div>

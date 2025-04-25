@@ -1,0 +1,85 @@
+<div class="toolbar">
+    <!-- Filters -->
+    <mat-form-field>
+      <mat-label>Search Characters</mat-label>
+      <input matInput placeholder="Enter name" [formControl]="filterControl" />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Filter by Status</mat-label>
+      <mat-select [formControl]="statusFilter">
+        <mat-option value="">All</mat-option>
+        <mat-option value="Alive">Alive</mat-option>
+        <mat-option value="Dead">Dead</mat-option>
+        <mat-option value="unknown">Unknown</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- View toggle button -->
+    <button mat-raised-button color="primary" (click)="toggleView()">
+      {{ isGridView ? 'Switch to List View' : 'Switch to Grid View' }}
+    </button>
+  </div>
+  
+  <!-- Character List -->
+  <div [ngClass]="isGridView ? 'character-list' : ''">
+    <ng-container *ngIf="isGridView; else listView">
+      <div *ngFor="let character of characters" class="character-card">
+        <img alt="character" [src]="character.image" [alt]="character.name" />
+        <h3>{{ character.name }}</h3>
+      </div>
+    </ng-container>
+  </div>
+  
+  <!-- List View -->
+  <ng-template #listView>
+    <table mat-table [dataSource]="characters" class="mat-elevation-z8">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let character">{{ character.id }}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let character">{{ character.name }}</td>
+      </ng-container>
+  
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let character">{{ character.status }}</td>
+      </ng-container>
+  
+      <!-- Species Column -->
+      <ng-container matColumnDef="species">
+        <th mat-header-cell *matHeaderCellDef>Species</th>
+        <td mat-cell *matCellDef="let character">{{ character.species }}</td>
+      </ng-container>
+  
+      <!-- Type Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let character">{{ character.type || 'N/A' }}</td>
+      </ng-container>
+  
+      <!-- Gender Column -->
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef>Gender</th>
+        <td mat-cell *matCellDef="let character">{{ character.gender }}</td>
+      </ng-container>
+  
+      <!-- Header and Row -->
+      <tr mat-header-row *matHeaderRowDef="['id', 'name', 'status', 'species', 'type', 'gender']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'status', 'species', 'type', 'gender'];"></tr>
+    </table>
+  </ng-template>
+  
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading">
+    Loading characters...
+  </div>
+  
+  <!-- Infinite Scroll -->
+  <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1" [infiniteScrollThrottle]="300" (scrolled)="loadCharacters()"></div>
