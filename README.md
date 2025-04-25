@@ -1,34 +1,38 @@
-RickAndMortyTabit
-A fun and interactive web application to explore characters from the Rick and Morty universe, built using Angular. This project leverages Angular 19, advanced filtering capabilities, and infinite scrolling for a seamless user experience.
+🌀 RickAndMortyTabit
+A fun and interactive web application to explore characters from the Rick and Morty universe, built using Angular 19. The app features advanced filtering, infinite scrolling, and responsive design for an engaging user experience.
 
 🚀 Features
-Character Browser: Discover characters from the Rick and Morty universe with detailed information.
+Character Browser: Explore characters with detailed information.
 
-Advanced Filtering: Filter characters by name and status in real time.
+Advanced Filtering: Real-time filtering by name and status.
 
-Infinite Scrolling: Effortlessly browse through the character list with automatic content loading.
+Infinite Scrolling: Automatically load content as you scroll.
 
-Responsive Design: Optimized for both desktop and mobile devices.
+Responsive Design: Works seamlessly on desktop and mobile.
 
-Retry Mechanism: Automatically handles API rate limits and retries for better reliability.
+Retry Mechanism: Handles API rate limits and retries intelligently.
 
 🛠️ Technology Stack
 Framework: Angular (v19)
 
 UI Library: Angular Material
 
-Modules: Reactive Forms, HTTP Client, Infinite Scroll
+Core Modules: Reactive Forms, HTTP Client, Infinite Scroll
 
-Backend: Rick and Morty API
+Backend API: Rick and Morty API
 
 🎉 Getting Started
 Prerequisites
-Ensure you have the following installed:
+Ensure the following tools are installed:
 
-Node.js (LTS version recommended)
+Node.js (LTS recommended)
 
-Angular CLI (npm install -g @angular/cli)
+Angular CLI: Install with:
 
+bash
+Copy
+Edit
+npm install -g @angular/cli
 Installation
 Clone the repository:
 
@@ -44,22 +48,22 @@ Copy
 Edit
 npm install
 🚀 Development
-Start the development server:
+Run the development server:
 
 bash
 Copy
 Edit
 ng serve
-Navigate to http://localhost:4200/. The application will automatically reload if you make any changes to the source files.
+Navigate to http://localhost:4200/. The application will reload automatically as you edit the source files.
 
 📦 Build
-Generate a production-ready build:
+Create a production build:
 
 bash
 Copy
 Edit
 ng build --prod
-The build artifacts will be output to the dist/ directory.
+The output will be available in the dist/ directory.
 
 ✅ Testing
 Unit Tests
@@ -70,40 +74,50 @@ Copy
 Edit
 ng test
 End-to-End Tests
-Run e2e tests using a compatible testing framework:
+Run end-to-end tests (install an e2e library if needed):
 
 bash
 Copy
 Edit
 ng e2e
-(Install an e2e testing library if not already configured.)
-
 📖 Code Generation
-Generate Angular components, directives, pipes, services, and more using the Angular CLI:
+Use Angular CLI to generate components, services, and more:
 
 bash
 Copy
 Edit
 ng generate component component-name
 ng generate service service-name
-For a complete list of available commands, visit the Angular CLI Documentation.
+For more commands, check out the Angular CLI Documentation.
 
 🛠️ Troubleshooting & Tips
-API Issues: The app handles 404 and 429 errors gracefully by retrying requests or showing user-friendly messages.
+API Issues: Automatically handles 404 and 429 errors with retries or user-friendly messages.
 
-Infinite Scrolling: Scroll to the bottom of the page to load more characters automatically.
+Infinite Scrolling: Scroll to the bottom to load more characters dynamically.
 
-Filter Updates: Update filters in real time, and the app will refresh the character list dynamically.
+Filter Updates: Filters refresh the character list in real time.
 
 🤝 Contributing
-Contributions are welcome! To get started:
+We welcome contributions! Here's how you can get started:
 
 Fork the repository.
 
-Create a new branch (git checkout -b feature/your-feature-name).
+Create a new branch:
 
-Commit your changes (git commit -m "Add some feature").
+bash
+Copy
+Edit
+git checkout -b feature/your-feature-name
+Commit your changes:
 
-Push to the branch (git push origin feature/your-feature-name).
+bash
+Copy
+Edit
+git commit -m "Add some feature"
+Push the branch:
 
-Open a pull request.
+bash
+Copy
+Edit
+git push origin feature/your-feature-name
+Open a Pull Request.
