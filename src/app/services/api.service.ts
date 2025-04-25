@@ -12,11 +12,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getCharacters(page: number, name?: string, status?: string): Observable<Character[]> {
+  getCharacters(page: number, name?: string, status?: string): Observable<{ info: any; results: Character[] }> {
     let query = `${this.BASE_URL}/character?page=${page}`;
     if (name) query += `&name=${name}`;
     if (status) query += `&status=${status}`;
-    return this.http.get<Character[]>(query);
+    return this.http.get<{ info: any; results: Character[] }>(query); // Adjusted type
   }
 
   getCharacterById(id: number): Observable<Character> {

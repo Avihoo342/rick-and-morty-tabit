@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-character-detail',
   templateUrl: './character-detail.component.html',
-  styleUrls: ['./character-detail.component.scss']
+  styleUrls: ['./character-detail.component.css']
 })
 export class CharacterDetailComponent implements OnInit {
   character$!: Observable<Character>;
