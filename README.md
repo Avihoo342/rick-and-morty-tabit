@@ -1,27 +1,123 @@
-# RickAndMortyTabit
+🌀 RickAndMortyTabit
+A fun and interactive web application to explore characters from the Rick and Morty universe, built using Angular 19. The app features advanced filtering, infinite scrolling, and responsive design for an engaging user experience.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+🚀 Features
+Character Browser: Explore characters with detailed information.
 
-## Development server
+Advanced Filtering: Real-time filtering by name and status.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Infinite Scrolling: Automatically load content as you scroll.
 
-## Code scaffolding
+Responsive Design: Works seamlessly on desktop and mobile.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Retry Mechanism: Handles API rate limits and retries intelligently.
 
-## Build
+🛠️ Technology Stack
+Framework: Angular (v19)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+UI Library: Angular Material
 
-## Running unit tests
+Core Modules: Reactive Forms, HTTP Client, Infinite Scroll
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Backend API: Rick and Morty API
 
-## Running end-to-end tests
+🎉 Getting Started
+Prerequisites
+Ensure the following tools are installed:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Node.js (LTS recommended)
 
-## Further help
+Angular CLI: Install with:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+bash
+Copy
+Edit
+npm install -g @angular/cli
+Installation
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/your-username/RickAndMortyTabit.git
+cd RickAndMortyTabit
+Install dependencies:
+
+bash
+Copy
+Edit
+npm install
+🚀 Development
+Run the development server:
+
+bash
+Copy
+Edit
+ng serve
+Navigate to http://localhost:4200/. The application will reload automatically as you edit the source files.
+
+📦 Build
+Create a production build:
+
+bash
+Copy
+Edit
+ng build --prod
+The output will be available in the dist/ directory.
+
+✅ Testing
+Unit Tests
+Run unit tests with Karma:
+
+bash
+Copy
+Edit
+ng test
+End-to-End Tests
+Run end-to-end tests (install an e2e library if needed):
+
+bash
+Copy
+Edit
+ng e2e
+📖 Code Generation
+Use Angular CLI to generate components, services, and more:
+
+bash
+Copy
+Edit
+ng generate component component-name
+ng generate service service-name
+For more commands, check out the Angular CLI Documentation.
+
+🛠️ Troubleshooting & Tips
+API Issues: Automatically handles 404 and 429 errors with retries or user-friendly messages.
+
+Infinite Scrolling: Scroll to the bottom to load more characters dynamically.
+
+Filter Updates: Filters refresh the character list in real time.
+
+🤝 Contributing
+We welcome contributions! Here's how you can get started:
+
+Fork the repository.
+
+Create a new branch:
+
+bash
+Copy
+Edit
+git checkout -b feature/your-feature-name
+Commit your changes:
+
+bash
+Copy
+Edit
+git commit -m "Add some feature"
+Push the branch:
+
+bash
+Copy
+Edit
+git push origin feature/your-feature-name
+Open a Pull Request.
