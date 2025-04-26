@@ -6,7 +6,6 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
-    "serve:prod": "npx http-server ./dist/rick-and-morty-tabit -p 8080 -c-1 -a 127.0.0.1 -i index.html",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
