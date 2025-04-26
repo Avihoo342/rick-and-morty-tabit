@@ -1,4 +1,5 @@
 <div *ngIf="character$ | async as character" class="character-detail-container">
+    <button (click)="goBack()" class="back-button">Back</button> 
     <div class="character-image">
       <img alt="character data" [src]="character.image" [alt]="character.name" />
     </div>
@@ -12,5 +13,5 @@
   </div>
   
   <div *ngIf="!(character$ | async)" class="loading">
-    <p>Loading character details...</p>
+    <p>{{STATUS_MESSAGES.LOADING_DETAILS}}</p>
   </div>

@@ -7,7 +7,16 @@ import { catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/
 import { MaterialModule } from '../../material.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { HttpClientModule } from '@angular/common/http';
-import { combineLatest, merge, of, Subscription } from 'rxjs';
+import { merge, of, Subscription } from 'rxjs';
+import {
+  TOOLBAR_LABELS,
+  CHARACTER_STATUSES,
+  STATUS_MESSAGES,
+  INFINITE_SCROLL_SETTINGS,
+  TABLE_COLUMNS
+} from '../../consts';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-character-list',
@@ -32,7 +41,20 @@ export class CharacterListComponent implements OnInit, OnDestroy {
   hasMoreCharacters = true;
   private filterSubscription: Subscription | null = null;
 
-  constructor(private apiService: ApiService) {}
+  public TOOLBAR_LABELS = TOOLBAR_LABELS;
+  public CHARACTER_STATUSES = CHARACTER_STATUSES;
+  public STATUS_MESSAGES = STATUS_MESSAGES;
+  public INFINITE_SCROLL_SETTINGS = INFINITE_SCROLL_SETTINGS;
+  public TABLE_COLUMNS = TABLE_COLUMNS;
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100 && !this.isLoading) {
+      this.loadCharacters();
+    }
+  }
+
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
     this.startFilterListeners();
@@ -76,6 +98,7 @@ export class CharacterListComponent implements OnInit, OnDestroy {
         if (data && data.results) {
           this.characters = [...this.characters, ...data.results];
           this.page++;
+          this.hasMoreCharacters = !!data.info.next;
         } else {
           this.hasMoreCharacters = false;
         }
@@ -94,13 +117,14 @@ export class CharacterListComponent implements OnInit, OnDestroy {
     this.isGridView = !this.isGridView;
   }
 
-  @HostListener('window:scroll', [])
-  onScroll(): void {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100 && !this.isLoading) {
-      this.loadCharacters();
-    }
+  onCharacterClick(id: number): void {
+    this.router.navigate([`/character/${id}`]);
   }
 
+  navigateToEpisode(): void {
+    this.router.navigate([`/episodes`]);
+  }
+  
   showErrorMessage(): void {
     console.error('An unexpected error occurred.');
   }

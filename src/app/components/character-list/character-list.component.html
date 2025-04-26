@@ -1,79 +1,60 @@
 <div class="toolbar">
-    <!-- Filters -->
+
     <mat-form-field>
-      <mat-label>Search Characters</mat-label>
+      <mat-label>{{ TOOLBAR_LABELS.SEARCH }}</mat-label>
       <input matInput placeholder="Enter name" [formControl]="filterControl" />
     </mat-form-field>
   
     <mat-form-field>
-      <mat-label>Filter by Status</mat-label>
+      <mat-label>{{ TOOLBAR_LABELS.FILTER }}</mat-label>
       <mat-select [formControl]="statusFilter">
-        <mat-option value="">All</mat-option>
-        <mat-option value="Alive">Alive</mat-option>
-        <mat-option value="Dead">Dead</mat-option>
-        <mat-option value="unknown">Unknown</mat-option>
+        <mat-option [value]="CHARACTER_STATUSES[3]">All</mat-option>
+        <mat-option [value]="CHARACTER_STATUSES[0]">Alive</mat-option>
+        <mat-option [value]="CHARACTER_STATUSES[1]">Dead</mat-option>
+        <mat-option [value]="CHARACTER_STATUSES[2]">Unknown</mat-option>
       </mat-select>
     </mat-form-field>
-  
-    <!-- View toggle button -->
+
     <button mat-raised-button color="primary" (click)="toggleView()">
-      {{ isGridView ? 'Switch to List View' : 'Switch to Grid View' }}
+        {{ isGridView ? TOOLBAR_LABELS.TOGGLE_VIEW_LIST : TOOLBAR_LABELS.TOGGLE_VIEW_GRID }}
+    </button>
+    <button mat-raised-button color="primary" (click)="navigateToEpisode()">
+        {{ TOOLBAR_LABELS.NAVIGATE_TO_EPISODES }}
     </button>
   </div>
   
-  <!-- Character List -->
+
   <div [ngClass]="isGridView ? 'character-list' : ''">
     <ng-container *ngIf="isGridView; else listView">
-      <div *ngFor="let character of characters" class="character-card">
+      <div *ngFor="let character of characters" class="character-card" (click)="onCharacterClick(character.id)">
         <img alt="character" [src]="character.image" [alt]="character.name" />
         <h3>{{ character.name }}</h3>
       </div>
     </ng-container>
   </div>
   
-  <!-- List View -->
   <ng-template #listView>
     <table mat-table [dataSource]="characters" class="mat-elevation-z8">
-
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let character">{{ character.id }}</td>
+      <ng-container *ngFor="let column of TABLE_COLUMNS" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
+        <td mat-cell *matCellDef="let character">{{ character[column] || 'N/A' }}</td>
       </ng-container>
-
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let character">{{ character.name }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let character">{{ character.status }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="species">
-        <th mat-header-cell *matHeaderCellDef>Species</th>
-        <td mat-cell *matCellDef="let character">{{ character.species }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef>Type</th>
-        <td mat-cell *matCellDef="let character">{{ character.type || 'N/A' }}</td>
-      </ng-container>
- 
-      <ng-container matColumnDef="gender">
-        <th mat-header-cell *matHeaderCellDef>Gender</th>
-        <td mat-cell *matCellDef="let character">{{ character.gender }}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="['id', 'name', 'status', 'species', 'type', 'gender']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'status', 'species', 'type', 'gender'];"></tr>
+  
+      <tr mat-header-row *matHeaderRowDef="TABLE_COLUMNS"></tr>
+      <tr mat-row *matRowDef="let row; columns: TABLE_COLUMNS;"></tr>
     </table>
   </ng-template>
   
   <div *ngIf="isLoading" class="loading">
-    Loading characters...
+    {{ STATUS_MESSAGES.LOADING }}
   </div>
   <div *ngIf="!isLoading && characters.length === 0" class="no-results">
-    <p>No characters found matching your criteria.</p>
+    <p>{{ STATUS_MESSAGES.NO_RESULTS }}</p>
   </div>
-  <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1" [infiniteScrollThrottle]="300" (scrolled)="loadCharacters()"></div>
+  <div
+  infinite-scroll
+  [infiniteScrollDistance]="INFINITE_SCROLL_SETTINGS.DISTANCE"
+  [infiniteScrollUpDistance]="INFINITE_SCROLL_SETTINGS.UP_DISTANCE"
+  [infiniteScrollThrottle]="INFINITE_SCROLL_SETTINGS.THROTTLE"
+  (scrolled)="loadCharacters()">
+</div>

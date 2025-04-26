@@ -1,8 +1,24 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { provideRouter, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
-import { routes } from './app.routes';
+const routes: Routes = [
+  { path: '',  loadComponent: () => import('./components/character-list/character-list.component')
+    .then(main => main.CharacterListComponent) },
+  { 
+    path: 'character/:id', loadComponent: () => import('./components/character-detail/character-detail.component')
+    .then(characterDetails => characterDetails.CharacterDetailComponent)
+  },
+  { 
+    path: 'episodes', loadComponent: () => import('./components/episode-list/episode-list.component')
+    .then(episode => episode.EpisodeListComponent)
+  },
+];
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    importProvidersFrom(HttpClientModule),
+    provideRouter(routes),
+  ],
 };
+
